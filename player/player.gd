@@ -1,9 +1,13 @@
 extends CharacterBody2D
 @onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
 
-@export var speed: int = 300
-@export var jump_velocity: int = -400
-@export var jump_horizontal: int = 100 
+@export var speed: int = 1000
+@export var max_horizontal_speed = 300
+@export var jump_velocity: int = -300
+@export var max_jump_horizontal: int = 300
+@export var jump_horizontal_speed: int = 1000
+@export var friction: int = 1800
+
 
 enum State { Idle, Run, Jump }
 
@@ -28,17 +32,19 @@ func player_jump(delta: float) -> void:
 	
 	if !is_on_floor() && current_state == State.Jump:
 		var direction = get_direction()
-		velocity.x += direction * jump_horizontal * delta
+		velocity.x += direction * jump_horizontal_speed * delta
+		velocity.x = clamp(velocity.x, -max_jump_horizontal, max_jump_horizontal)
 
-func player_run(_delta: float) -> void:
+func player_run(delta: float) -> void:
 	if !is_on_floor():
 		return
 	var direction = get_direction()
 	
 	if direction:
-		velocity.x = speed * direction
+		velocity.x += speed * direction * delta
+		velocity.x = clamp(velocity.x, -max_horizontal_speed, max_horizontal_speed)
 	else:
-		velocity.x = move_toward(velocity.x, 0, speed)
+		velocity.x = move_toward(velocity.x, 0, friction * delta)
 	
 	if direction != 0:
 		current_state = State.Run
@@ -48,7 +54,7 @@ func player_falling(delta: float) -> void:
 	if !is_on_floor():
 		velocity += get_gravity() * delta
 
-func player_idle(_delta: float) -> void:
+func player_idle(_d: float) -> void:
 	if is_on_floor():
 		current_state = State.Idle
 
