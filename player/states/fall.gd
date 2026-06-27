@@ -8,8 +8,7 @@ func onEnter():
 
 func updatePhysics(delta: float) -> void:
 	var direction = get_direction()
-	player.velocity.x = move_toward(player.velocity.x, player.max_horizontal_speed * direction, player.acceleration * delta * abs(direction))
-	player.velocity.y += player.gravity * delta
+	player.velocity.x = move_toward(player.velocity.x, player.max_air_speed * direction, player.acceleration * delta * abs(direction))
 	
 	player.move_and_slide()
 	

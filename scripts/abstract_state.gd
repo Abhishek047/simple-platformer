@@ -7,8 +7,8 @@ var state_machine: StateMachine;
 var actor: BaseActor;
 var animation_manager: StateAnimationManager;
 
-func initActor(actor: BaseActor):
-	self.actor = actor
+func initActor(prop_actor: BaseActor):
+	self.actor = prop_actor
 
 func onEnter():
 	pass

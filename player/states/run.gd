@@ -13,11 +13,8 @@ func updatePhysics(delta: float) -> void:
 		state_machine.change_state('idleplayerstate')
 		return;
 	
-	player.velocity.x = move_toward(player.velocity.x, player.max_horizontal_speed * direction, player.acceleration * delta * abs(direction))
+	player.velocity.x = move_toward(player.velocity.x, player.max_ground_speed * direction, player.acceleration * delta * abs(direction))
 
-	if direction != 0:
-		animation_manager.flip_animation_horizontal(false if direction > 0 else true)
-	
 	player.move_and_slide()
 
 func handleInput(input: InputEvent) -> void:
