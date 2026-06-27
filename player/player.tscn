@@ -2,8 +2,13 @@
 
 [ext_resource type="Script" uid="uid://d2pi14vb4li1u" path="res://player/player.gd" id="1_g1dw6"]
 [ext_resource type="Texture2D" uid="uid://28fl7x8fhbe8" path="res://player/player-idle.png" id="1_rkbax"]
+[ext_resource type="Script" uid="uid://cxlq46xkcdehx" path="res://scripts/state_machine.gd" id="1_yw30f"]
 [ext_resource type="Texture2D" uid="uid://bj7yl0xkbghfp" path="res://player/player-run.png" id="2_g1dw6"]
 [ext_resource type="Texture2D" uid="uid://b347hoao1oj1y" path="res://player/player-jump.png" id="3_yw30f"]
+[ext_resource type="Script" uid="uid://ojip0kaalywd" path="res://player/states/idle.gd" id="5_qjkh3"]
+[ext_resource type="Script" uid="uid://cbjw8ht3wlrfh" path="res://scripts/state_animation_manager.gd" id="7_boad6"]
+[ext_resource type="Script" uid="uid://c66ufcp5735yg" path="res://player/states/run.gd" id="7_rgyib"]
+[ext_resource type="Script" uid="uid://1ikunf2a6gm6" path="res://player/states/jump.gd" id="8_hg6s5"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_yw30f"]
 atlas = ExtResource("1_rkbax")
@@ -175,13 +180,37 @@ height = 38.0
 collision_layer = 2
 script = ExtResource("1_g1dw6")
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=535752455]
+[node name="actor_animations" type="AnimatedSprite2D" parent="." unique_id=535752455]
 position = Vector2(0, -24)
 sprite_frames = SubResource("SpriteFrames_e7oew")
-animation = &"jump"
+animation = &"idle"
 autoplay = "idle"
-frame_progress = 0.92094564
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1134789706]
 position = Vector2(0, -19)
 shape = SubResource("CapsuleShape2D_c35mf")
+
+[node name="StateMachine" type="Node" parent="." unique_id=1284085338 node_paths=PackedStringArray("inital_state")]
+script = ExtResource("1_yw30f")
+inital_state = NodePath("IdlePlayerState")
+metadata/_custom_type_script = "uid://cxlq46xkcdehx"
+
+[node name="IdlePlayerState" type="Node" parent="StateMachine" unique_id=1560458352]
+script = ExtResource("5_qjkh3")
+animation_name = "idle"
+metadata/_custom_type_script = "uid://ojip0kaalywd"
+
+[node name="RunPlayerState" type="Node" parent="StateMachine" unique_id=1811050186]
+script = ExtResource("7_rgyib")
+animation_name = "run"
+metadata/_custom_type_script = "uid://c66ufcp5735yg"
+
+[node name="JumpPlayerState" type="Node" parent="StateMachine" unique_id=1821147247]
+script = ExtResource("8_hg6s5")
+animation_name = "jump"
+metadata/_custom_type_script = "uid://1ikunf2a6gm6"
+
+[node name="StateAnimationManager" type="Node" parent="." unique_id=741474719 node_paths=PackedStringArray("animation_sprite_2d")]
+script = ExtResource("7_boad6")
+animation_sprite_2d = NodePath("../actor_animations")
+metadata/_custom_type_script = "uid://cbjw8ht3wlrfh"

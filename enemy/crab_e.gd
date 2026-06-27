@@ -24,7 +24,7 @@ func _ready() -> void:
 			if direction == Vector2.LEFT && dx <= 0: 
 				current_pos = i
 	else:
-		print("No patrol points: [Needed]")
+		pass
 	current_state = State.Idle
 	
 
@@ -34,7 +34,7 @@ func _physics_process(delta: float) -> void:
 	handle_walk(delta)
 	
 	enemy_animations();
-	print("current state: ", State.keys()[current_state])
+	#print("current state: ", State.keys()[current_state])
 	move_and_slide()
 
 

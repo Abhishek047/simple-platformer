@@ -7,6 +7,7 @@
 [node name="Level1" unique_id=1231405625 instance=ExtResource("1_vn7o3")]
 
 [node name="backgrounds" parent="." index="0" unique_id=611530860 instance=ExtResource("3_kx6l7")]
+position = Vector2(-80, 0)
 
 [node name="tiles" type="Node" parent="." index="1" unique_id=1805653663]
 
