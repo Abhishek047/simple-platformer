@@ -7,13 +7,15 @@ func onEnter():
 	pass
 
 func updatePhysics(delta: float) -> void:
-	if(player.velocity.x != 0.0):
-		#print("stopping player...")
+	var move_direction = Input.get_axis("move_left", "move_right")
+	if(move_direction == 0.0):
 		var friction = player.friction;
 		if not player.is_on_floor():
 			friction = player.air_friction
 		player.velocity.x = move_toward(player.velocity.x, 0.0, friction * delta)
-		player.move_and_slide()
+	else:
+		state_machine.change_state('runplayerstate')
+	player.move_and_slide()
 
 func handleInput(input: InputEvent) -> void:
 	if input.is_action_pressed("move_left") or input.is_action_pressed("move_right"):

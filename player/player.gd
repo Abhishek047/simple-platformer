@@ -7,7 +7,7 @@ class_name MainPlayer
 @export var max_air_speed = 270
 @export var down_gravity: int = 1500
 @export var acceleration: int = 1200
-@export var air_acceleration: int = 700
+@export var air_acceleration: int = 400
 @export var friction: int = 2000
 @export var air_friction: int = 700
 
