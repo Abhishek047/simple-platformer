@@ -31,6 +31,12 @@ func _physics_process(delta):
 	if direction != 0:
 		player_animation_manager.flip_animation_horizontal(false if direction > 0 else true)
 	
+	player.move_and_slide()
+
+func change_state(new_state: String) -> void:
+	super.change_state(new_state);
+	if(player):
+		player.move_and_slide()
 
 func get_direction() -> float:
 	var direction: float = Input.get_axis("move_left", "move_right")

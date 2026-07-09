@@ -8,16 +8,23 @@ func onEnter():
 	pass
 
 func updatePhysics(delta: float) -> void:
+	# if player has a velocity after being in jump state and we release jump button it should reduce the velocity and bring the player back
+	if Input.is_action_just_released("jump") && player.velocity.y < 0: 
+		player.velocity.y *= 0.56
 	var direction = get_direction()
-	player.velocity.x = move_toward(player.velocity.x, player.max_air_speed * direction, player.air_acceleration * delta * abs(direction))
+	var acceleration = player.air_acceleration
+	# Turning around in the air
+	if direction != 0 and sign(player.velocity.x) != direction:
+		acceleration = player.air_turn_acceleration
 	
-	player.move_and_slide()
+	player.velocity.x = move_toward(player.velocity.x, player.max_air_speed * direction, acceleration * delta * abs(direction))
 	
 	if player.is_on_floor():
 		if direction != 0:
 			state_machine.change_state('runplayerstate')
 		else:
 			state_machine.change_state('idleplayerstate')
+
 
 func get_direction() -> float:
 	var direction: float = Input.get_axis("move_left", "move_right")

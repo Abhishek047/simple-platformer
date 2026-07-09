@@ -9,9 +9,6 @@ func onEnter():
 func updatePhysics(delta: float) -> void:
 	var direction = get_direction()
 	player.velocity.x = move_toward(player.velocity.x, player.max_air_speed * direction, player.acceleration * delta * abs(direction))
-	
-	player.move_and_slide()
-	
 	if player.is_on_floor():
 		if direction != 0:
 			state_machine.change_state('runplayerstate')
