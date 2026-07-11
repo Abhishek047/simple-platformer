@@ -6,6 +6,7 @@ class_name StateMachine
 var current_state: BaseState;
 
 var states: Dictionary = {};
+var last_state: String = "";
 
 func _ready() -> void:
 	# Get all the states that are assigned as children to this state machine
@@ -41,6 +42,9 @@ func _input(event: InputEvent) -> void:
 
 func change_state(new_state: String) -> void:
 	var new_state_node = states.get(new_state.to_lower())
+	if current_state:
+		last_state = current_state.name.to_lower();
+	
 	print("State Change: [", new_state,"]")
 	if(!new_state_node):
 		print("State not found: [", new_state,"]")

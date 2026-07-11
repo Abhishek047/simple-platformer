@@ -3,13 +3,14 @@ class_name MainPlayer
 
 @export var jump_height: int = 350
 @export var up_gravity: int = 800
-@export var max_ground_speed = 270
-@export var max_air_speed = 270
+@export var max_ground_speed = 220
+@export var max_air_speed = 250
+@export var max_fall_speed = 1000
 @export var down_gravity: int = 1500
-@export var acceleration: int = 1200
-@export var turn_acceleration: int = 1500
+@export var acceleration: int = 800
+@export var turn_acceleration: int = 1000
 @export var air_acceleration: int = 800
-@export var air_turn_acceleration: int = 2500
+@export var air_turn_acceleration: int = 5000
 @export var friction: int = 2000
 
 var state_machine: StateMachine

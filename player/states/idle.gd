@@ -9,7 +9,8 @@ func onEnter():
 func updatePhysics(delta: float) -> void:
 	var move_direction = Input.get_axis("move_left", "move_right")
 	if(move_direction == 0.0):
-		player.velocity.x = move_toward(player.velocity.x, 0.0, player.friction * delta)
+		var friction = player.friction * 2 if state_machine.last_state == "fallplayerstate" else player.friction;
+		player.velocity.x = move_toward(player.velocity.x, 0.0, friction * delta)
 	else:
 		state_machine.change_state('runplayerstate')
 	

@@ -24,6 +24,7 @@ func _physics_process(delta):
 			player.velocity.y += player.up_gravity * delta
 		else:
 			player.velocity.y += player.down_gravity * delta
+			player.velocity.y = clamp(player.velocity.y, -INF, player.max_fall_speed)
 		if current_state.name.to_lower() != STATES_NAMES.FALL && player.velocity.y >= 0:
 			change_state(STATES_NAMES.FALL)
 	super._physics_process(delta)
