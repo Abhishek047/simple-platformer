@@ -41,7 +41,7 @@ func _ready() -> void:
 			animation_manager = child
 	
 	state_machine.init(self, animation_manager)
-
+# test
 func initialise_jump_buffer() -> void:
 	jump_buffer_timer = Timer.new();
 	jump_buffer_timer.one_shot = true;
