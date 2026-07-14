@@ -5,6 +5,12 @@ class_name JumpPlayerState
 func onEnter():
 	player.velocity.y -= player.jump_height
 	animation_manager.onPlay(animation_name)
+	
+	if state_machine.last_state == "fallplayerstate" && !Input.is_action_pressed("jump"):
+		# letting this state run and then check if it not press in next frame
+		await get_tree().physics_frame;
+		player.velocity.y *= 0.56
+		state_machine.change_state("fallplayerstate");
 	pass
 
 func updatePhysics(delta: float) -> void:

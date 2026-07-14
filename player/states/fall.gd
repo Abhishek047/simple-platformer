@@ -10,10 +10,16 @@ func updatePhysics(delta: float) -> void:
 	var direction = get_direction()
 	player.velocity.x = move_toward(player.velocity.x, player.max_air_speed * direction, player.acceleration * delta * abs(direction))
 	if player.is_on_floor():
+		if player.jump_buffer_timer.time_left > 0.0:
+			state_machine.change_state('jumpplayerstate');
+			return
 		if direction != 0:
 			state_machine.change_state('runplayerstate')
 		else:
 			state_machine.change_state('idleplayerstate')
+
+func onExit():
+	player.jump_buffer_timer.stop();
 
 func get_direction() -> float:
 	var direction: float = Input.get_axis("move_left", "move_right")

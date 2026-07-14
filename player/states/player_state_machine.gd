@@ -11,9 +11,13 @@ const STATES_NAMES := {
 var player: MainPlayer
 var player_animation_manager: StateAnimationManager;
 
+func _ready() -> void:
+	super._ready()
+
 func init(actor: BaseActor, animation_manager: StateAnimationManager):
 	super.init(actor, animation_manager)
 	player = actor as MainPlayer
+	# link jump buffer timer
 	player_animation_manager = animation_manager
 
 func _physics_process(delta):
@@ -45,4 +49,6 @@ func get_direction() -> float:
 
 func _input(event):
 	# handle dead player here to return
+	if(event.is_action_pressed("jump")):
+		player.jump_buffer_timer.start();
 	super._input(event);
