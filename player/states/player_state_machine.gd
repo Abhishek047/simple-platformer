@@ -25,10 +25,8 @@ func _physics_process(delta):
 	# Global transitions
 	if not player.is_on_floor():
 		if player.velocity.y <= 0:
-			print("Gravity up applied")
 			player.velocity.y += player.up_gravity * delta
 		else:
-			print("Gravity down applied")
 			player.velocity.y += player.down_gravity * delta
 			player.velocity.y = clamp(player.velocity.y, -INF, player.max_fall_speed)
 		if current_state.name.to_lower() != STATES_NAMES.FALL && player.velocity.y >= 0:

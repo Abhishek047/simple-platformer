@@ -19,6 +19,9 @@ class_name MainPlayer
 @export var air_acceleration = 1200
 @export var turn_acceleration = 5000
 
+@export var coyote_timer_value = 0.125
+@export var jump_buffer_time_value = 0.1
+
 # high friction to stop ASAP
 @export var friction = 3000
 
@@ -33,7 +36,7 @@ var animation_manager: StateAnimationManager
 
 
 func _ready() -> void:
-	Engine.time_scale = 0.4
+	# Engine.time_scale = 0.4
 	init_specs();
 	# set animation manager and state machine
 	for child in get_children():
@@ -51,13 +54,13 @@ func init_specs() -> void:
 func initialise_coyote_timer() -> void:
 	coyote_timer = Timer.new();
 	coyote_timer.one_shot = true;
-	coyote_timer.wait_time = 1;
+	coyote_timer.wait_time = coyote_timer_value;
 	add_child(coyote_timer);
 
 func initialise_jump_buffer() -> void:
 	jump_buffer_timer = Timer.new();
 	jump_buffer_timer.one_shot = true;
-	jump_buffer_timer.wait_time = 0.125;
+	jump_buffer_timer.wait_time = jump_buffer_time_value;
 	jump_buffer_timer.timeout.connect(handle_jump_timeout_complete)
 	add_child(jump_buffer_timer);
 

@@ -24,6 +24,7 @@ func handleInput(_input: InputEvent) -> void:
 	if(_input.is_action_pressed("jump")):
 		if should_start_coyote() && player.coyote_timer.time_left > 0.0:
 			player.coyote_timer.stop();
+			player.velocity.y = 0
 			state_machine.change_state('jumpplayerstate');
 
 func onExit():
