@@ -9,6 +9,7 @@ func onEnter():
 	if state_machine.last_state == "fallplayerstate" && !Input.is_action_pressed("jump"):
 		# letting this state run and then check if it not press in next frame
 		await get_tree().physics_frame;
+		print("lowring-speed here")
 		player.velocity.y *= 0.56
 		state_machine.change_state("fallplayerstate");
 	pass
@@ -16,6 +17,7 @@ func onEnter():
 func updatePhysics(delta: float) -> void:
 	# if player has a velocity after being in jump state and we release jump button it should reduce the velocity and bring the player back
 	if Input.is_action_just_released("jump") && player.velocity.y < 0: 
+		print("lowring-speed here-----")
 		player.velocity.y *= 0.56
 	var direction = get_direction()
 	var acceleration = player.air_acceleration

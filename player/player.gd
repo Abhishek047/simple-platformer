@@ -23,16 +23,18 @@ class_name MainPlayer
 @export var friction = 3000
 
 # player state
+
 # jump_buffer_timer
 var jump_buffer_timer: Timer
+var coyote_timer: Timer;
 
 var state_machine: StateMachine
 var animation_manager: StateAnimationManager
 
 
 func _ready() -> void:
-	# Engine.time_scale = 0.4
-	initialise_jump_buffer();
+	Engine.time_scale = 0.4
+	init_specs();
 	# set animation manager and state machine
 	for child in get_children():
 		if(state_machine == null && child is StateMachine):
@@ -41,7 +43,17 @@ func _ready() -> void:
 			animation_manager = child
 	
 	state_machine.init(self, animation_manager)
-# test
+
+func init_specs() -> void: 
+	initialise_coyote_timer();
+	initialise_jump_buffer();
+
+func initialise_coyote_timer() -> void:
+	coyote_timer = Timer.new();
+	coyote_timer.one_shot = true;
+	coyote_timer.wait_time = 1;
+	add_child(coyote_timer);
+
 func initialise_jump_buffer() -> void:
 	jump_buffer_timer = Timer.new();
 	jump_buffer_timer.one_shot = true;

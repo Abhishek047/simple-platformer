@@ -45,7 +45,7 @@ func change_state(new_state: String) -> void:
 	if current_state:
 		last_state = current_state.name.to_lower();
 	
-	print("State Change: [", new_state,"]")
+	# print("State Change: [", new_state,"]")
 	if(!new_state_node):
 		print("State not found: [", new_state,"]")
 		print("States available: ", states.keys())
