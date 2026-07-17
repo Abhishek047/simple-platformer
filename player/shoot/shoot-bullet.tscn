@@ -1,0 +1,35 @@
+[gd_scene format=3 uid="uid://bcsot1titguwh"]
+
+[ext_resource type="Texture2D" uid="uid://nd8gqi4bic2b" path="res://player/shoot/shot.png" id="1_hbthn"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_c32vt"]
+atlas = ExtResource("1_hbthn")
+region = Rect2(0, 0, 6, 4)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1dcop"]
+atlas = ExtResource("1_hbthn")
+region = Rect2(6, 0, 6, 4)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_1wvdt"]
+animations = [{
+"frames": [],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_c32vt")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1dcop")
+}],
+"loop": true,
+"name": &"shoot",
+"speed": 7.0
+}]
+
+[node name="ShootBullet" type="AnimatedSprite2D" unique_id=188376507]
+sprite_frames = SubResource("SpriteFrames_1wvdt")
+animation = &"shoot"
+frame_progress = 0.7195019
