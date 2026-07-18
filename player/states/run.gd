@@ -4,12 +4,17 @@ class_name RunPlayerState
 var landed_from_fall: bool = false
 func onEnter():
 	animation_manager.onPlay(animation_name)
+	if player.player_is_shooting():
+		state_machine.change_state("shootrunplayerstate")
 	landed_from_fall = state_machine.last_state == "fallplayerstate"
 	pass
 
 func updatePhysics(delta: float) -> void:
-	var direction = get_direction()
-	var acceleration = player.acceleration * 0.4 if landed_from_fall else player.acceleration;
+	var direction = player.get_direction()
+	var acceleration: float = player.acceleration
+	if landed_from_fall:
+		acceleration = player.acceleration * 0.4;
+	
 	if direction != 0 and sign(player.velocity.x) != direction:
 		acceleration = player.air_turn_acceleration
 
@@ -24,8 +29,5 @@ func updatePhysics(delta: float) -> void:
 func handleInput(input: InputEvent) -> void:
 	if input.is_action_pressed("jump"):
 		state_machine.change_state('jumpplayerstate')
-
-
-func get_direction() -> float:
-	var direction: float = Input.get_axis("move_left", "move_right")
-	return direction;
+	if input.is_action_pressed("shoot"):
+		state_machine.change_state("shootrunplayerstate")

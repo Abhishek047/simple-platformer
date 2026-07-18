@@ -3,6 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://byxf81odo1lc2" path="res://enemy/enemy_assets/crab-idle.png" id="1_c27nh"]
 [ext_resource type="Script" uid="uid://4ihb2dv3kuj0" path="res://enemy/crab_e.gd" id="1_uy6dy"]
 [ext_resource type="Texture2D" uid="uid://cn0ym41tn1uhd" path="res://enemy/enemy_assets/crab-walk.png" id="2_uy6dy"]
+[ext_resource type="Script" uid="uid://s30fkqvet7vq" path="res://scripts/health_script.gd" id="4_s3tgy"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_s3tgy"]
 atlas = ExtResource("1_c27nh")
@@ -81,6 +82,9 @@ animations = [{
 [sub_resource type="CircleShape2D" id="CircleShape2D_c27nh"]
 radius = 13.0
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_uy6dy"]
+radius = 15.0
+
 [node name="Crab_E" type="CharacterBody2D" unique_id=623708034]
 script = ExtResource("1_uy6dy")
 
@@ -100,4 +104,19 @@ debug_color = Color(0.92771673, 0.24964693, 0.26696035, 0.41960785)
 wait_time = 2.5
 autostart = true
 
+[node name="Hurtbox" type="Area2D" parent="." unique_id=95907941]
+collision_layer = 4
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox" unique_id=2119030112]
+position = Vector2(0, -13)
+shape = SubResource("CircleShape2D_uy6dy")
+debug_color = Color(0, 0.5903202, 0.7507857, 0.28235295)
+
+[node name="HealthComponent" type="Node" parent="." unique_id=91930194]
+script = ExtResource("4_s3tgy")
+max_health = 3
+metadata/_custom_type_script = "uid://s30fkqvet7vq"
+
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="area_entered" from="Hurtbox" to="." method="_on_hurtbox_area_entered"]

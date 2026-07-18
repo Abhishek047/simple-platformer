@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://bcsot1titguwh"]
 
 [ext_resource type="Texture2D" uid="uid://nd8gqi4bic2b" path="res://player/shoot/shot.png" id="1_hbthn"]
+[ext_resource type="Script" uid="uid://bkkuf6n5vtjnm" path="res://player/shoot/bullet.gd" id="2_c32vt"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_c32vt"]
 atlas = ExtResource("1_hbthn")
@@ -29,7 +30,21 @@ animations = [{
 "speed": 7.0
 }]
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_c32vt"]
+radius = 2.0
+
 [node name="ShootBullet" type="AnimatedSprite2D" unique_id=188376507]
 sprite_frames = SubResource("SpriteFrames_1wvdt")
 animation = &"shoot"
 frame_progress = 0.7195019
+script = ExtResource("2_c32vt")
+
+[node name="Hitbox" type="Area2D" parent="." unique_id=932718221]
+collision_layer = 2
+collision_mask = 5
+
+[node name="BulletHitArea" type="CollisionShape2D" parent="Hitbox" unique_id=1392699032]
+shape = SubResource("CircleShape2D_c32vt")
+
+[connection signal="area_entered" from="Hitbox" to="." method="_on_hitbox_area_entered"]
+[connection signal="body_entered" from="Hitbox" to="." method="_on_hitbox_body_entered"]

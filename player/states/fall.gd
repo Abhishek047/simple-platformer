@@ -9,7 +9,7 @@ func onEnter():
 	pass
 
 func updatePhysics(delta: float) -> void:
-	var direction = get_direction()
+	var direction = player.get_direction()
 	player.velocity.x = move_toward(player.velocity.x, player.max_air_speed * direction, player.acceleration * delta * abs(direction))
 	if player.is_on_floor():
 		if player.jump_buffer_timer.time_left > 0.0:
@@ -33,7 +33,3 @@ func onExit():
 
 func should_start_coyote() -> bool:
 	return state_machine.last_state == "idleplayerstate" || state_machine.last_state == "runplayerstate"
-
-func get_direction() -> float:
-	var direction: float = Input.get_axis("move_left", "move_right")
-	return direction;

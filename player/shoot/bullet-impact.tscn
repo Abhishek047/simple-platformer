@@ -1,0 +1,52 @@
+[gd_scene format=3 uid="uid://dyoxaywm5d7ga"]
+
+[ext_resource type="Texture2D" uid="uid://1k2xa6xq4hul" path="res://player/shoot/impact.png" id="1_tglj3"]
+[ext_resource type="Script" uid="uid://durtvm4t50dg5" path="res://player/shoot/bullet_impact.gd" id="2_qkqmr"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qkqmr"]
+atlas = ExtResource("1_tglj3")
+region = Rect2(0, 0, 12, 12)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_otwr8"]
+atlas = ExtResource("1_tglj3")
+region = Rect2(12, 0, 12, 12)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5lv1h"]
+atlas = ExtResource("1_tglj3")
+region = Rect2(24, 0, 12, 12)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1kv6c"]
+atlas = ExtResource("1_tglj3")
+region = Rect2(36, 0, 12, 12)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_qctxf"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qkqmr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_otwr8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5lv1h")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1kv6c")
+}],
+"loop": false,
+"name": &"bullet-impact",
+"speed": 15.0
+}, {
+"frames": [],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="BulletImpact" type="AnimatedSprite2D" unique_id=608139923]
+sprite_frames = SubResource("SpriteFrames_qctxf")
+animation = &"bullet-impact"
+frame = 3
+frame_progress = 1.0
+script = ExtResource("2_qkqmr")

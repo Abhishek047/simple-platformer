@@ -11,6 +11,7 @@
 [ext_resource type="Script" uid="uid://c66ufcp5735yg" path="res://player/states/run.gd" id="7_rgyib"]
 [ext_resource type="Script" uid="uid://1ikunf2a6gm6" path="res://player/states/jump.gd" id="8_hg6s5"]
 [ext_resource type="Script" uid="uid://e6idew183rdo" path="res://player/states/fall.gd" id="9_8t03j"]
+[ext_resource type="Script" uid="uid://bufkx1dbbo35t" path="res://player/states/shoot_run.gd" id="11_ebec5"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_yw30f"]
 atlas = ExtResource("1_rkbax")
@@ -293,7 +294,14 @@ script = ExtResource("9_8t03j")
 animation_name = "jump"
 metadata/_custom_type_script = "uid://e6idew183rdo"
 
+[node name="ShootRunPlayerState" type="Node" parent="PlayerStateMachine" unique_id=601328534]
+script = ExtResource("11_ebec5")
+metadata/_custom_type_script = "uid://bufkx1dbbo35t"
+
 [node name="StateAnimationManager" type="Node" parent="." unique_id=741474719 node_paths=PackedStringArray("animation_sprite_2d")]
 script = ExtResource("7_boad6")
 animation_sprite_2d = NodePath("../actor_animations")
 metadata/_custom_type_script = "uid://cbjw8ht3wlrfh"
+
+[node name="Marker2D" type="Marker2D" parent="." unique_id=1136969999]
+position = Vector2(18, -25)

@@ -5,6 +5,9 @@ const SPEED = 1500;
 @export var patrol_points: Node;
 @onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
 @onready var timer: Timer = $Timer
+@onready var health_component: HealthComponent = $HealthComponent
+var death_effect = preload("uid://i6tglufa65cv");
+
 
 enum State { Walk , Idle }
 var current_state: State;
@@ -14,6 +17,7 @@ var current_pos: int;
 var can_walk: bool = false;
 
 func _ready() -> void:
+	health_component.died.connect(_on_died)
 	if patrol_points != null:
 		for i in patrol_points.get_children().size():
 			var point = patrol_points.get_child(i);
@@ -78,3 +82,13 @@ func start_walk() -> void:
 
 func _on_timer_timeout() -> void:
 	start_walk()
+
+func _on_died():
+	var effect := death_effect.instantiate() as DeathEffect
+	effect.global_position = global_position
+	get_tree().current_scene.add_child(effect)
+	queue_free()
+
+func _on_hurtbox_area_entered(area: Area2D) -> void:
+	if area.get_parent().has_method("get_bullet_damage"):
+		health_component.hit(area.get_parent().get_bullet_damage())

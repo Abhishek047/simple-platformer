@@ -1,6 +1,9 @@
 extends BaseActor
 class_name MainPlayer
 
+var bullet = preload("uid://bcsot1titguwh")
+@onready var muzzle: Marker2D = $Marker2D
+
 # jump height
 @export var jump_height = 360
 #gravity
@@ -33,9 +36,10 @@ var coyote_timer: Timer;
 
 var state_machine: StateMachine
 var animation_manager: StateAnimationManager
-
+var base_muzzle_position: Vector2;
 
 func _ready() -> void:
+	base_muzzle_position = muzzle.position;
 	# Engine.time_scale = 0.4
 	init_specs();
 	# set animation manager and state machine
@@ -61,8 +65,11 @@ func initialise_jump_buffer() -> void:
 	jump_buffer_timer = Timer.new();
 	jump_buffer_timer.one_shot = true;
 	jump_buffer_timer.wait_time = jump_buffer_time_value;
-	jump_buffer_timer.timeout.connect(handle_jump_timeout_complete)
 	add_child(jump_buffer_timer);
 
-func handle_jump_timeout_complete() -> void:
-	print("Timeout complete")
+func player_is_shooting() -> bool:
+	return Input.is_action_pressed("shoot")
+
+func get_direction() -> float:
+	var direction: float = Input.get_axis("move_left", "move_right")
+	return direction;
