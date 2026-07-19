@@ -16,6 +16,7 @@ func _ready() -> void:
 	timer.start()
 
 func _physics_process(delta: float) -> void:
+	# sometimes bulet stays need to give the last facing direction
 	move_local_x(direction * speed * delta)
 
 

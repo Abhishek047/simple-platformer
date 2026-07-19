@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://bkintsvpnkqd8"]
 
 [ext_resource type="Texture2D" uid="uid://byxf81odo1lc2" path="res://enemy/enemy_assets/crab-idle.png" id="1_c27nh"]
-[ext_resource type="Script" uid="uid://4ihb2dv3kuj0" path="res://enemy/crab_e.gd" id="1_uy6dy"]
+[ext_resource type="Script" uid="uid://4ihb2dv3kuj0" path="res://enemy/crab/crab_e.gd" id="1_uy6dy"]
 [ext_resource type="Texture2D" uid="uid://cn0ym41tn1uhd" path="res://enemy/enemy_assets/crab-walk.png" id="2_uy6dy"]
 [ext_resource type="Script" uid="uid://s30fkqvet7vq" path="res://scripts/health_script.gd" id="4_s3tgy"]
 

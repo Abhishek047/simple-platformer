@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://bg3e1bn5ihup1" path="res://levels/base_level.tscn" id="1_khvd6"]
 [ext_resource type="PackedScene" uid="uid://uqvnv4knnfma" path="res://backgrounds/backgrounds.tscn" id="2_3qvow"]
-[ext_resource type="PackedScene" uid="uid://bkintsvpnkqd8" path="res://enemy/crab_e.tscn" id="2_t6d3y"]
+[ext_resource type="PackedScene" uid="uid://bkintsvpnkqd8" path="res://enemy/crab/crab_e.tscn" id="2_t6d3y"]
 [ext_resource type="PackedScene" uid="uid://2cgem57pdcux" path="res://tileSet/base_tile_map.tscn" id="4_qqivc"]
 
 [node name="TestLevel" unique_id=1231405625 instance=ExtResource("1_khvd6")]
