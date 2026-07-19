@@ -3,7 +3,11 @@
 [ext_resource type="Texture2D" uid="uid://byxf81odo1lc2" path="res://enemy/enemy_assets/crab-idle.png" id="1_c27nh"]
 [ext_resource type="Script" uid="uid://4ihb2dv3kuj0" path="res://enemy/crab/crab_e.gd" id="1_uy6dy"]
 [ext_resource type="Texture2D" uid="uid://cn0ym41tn1uhd" path="res://enemy/enemy_assets/crab-walk.png" id="2_uy6dy"]
+[ext_resource type="Script" uid="uid://cuelm0uyrp44p" path="res://enemy/states/enemy_state_management.gd" id="4_o614a"]
 [ext_resource type="Script" uid="uid://s30fkqvet7vq" path="res://scripts/health_script.gd" id="4_s3tgy"]
+[ext_resource type="Script" uid="uid://fsskut86vv0w" path="res://enemy/crab/crab_walk_state.gd" id="5_br8xs"]
+[ext_resource type="Script" uid="uid://6u8c5htcca03" path="res://enemy/crab/crab_idle_state.gd" id="6_br8xs"]
+[ext_resource type="Script" uid="uid://cbjw8ht3wlrfh" path="res://scripts/state_animation_manager.gd" id="8_aa35n"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_s3tgy"]
 atlas = ExtResource("1_c27nh")
@@ -100,10 +104,6 @@ position = Vector2(0, -13)
 shape = SubResource("CircleShape2D_c27nh")
 debug_color = Color(0.92771673, 0.24964693, 0.26696035, 0.41960785)
 
-[node name="Timer" type="Timer" parent="." unique_id=961050528]
-wait_time = 2.5
-autostart = true
-
 [node name="Hurtbox" type="Area2D" parent="." unique_id=95907941]
 collision_layer = 4
 collision_mask = 2
@@ -118,5 +118,23 @@ script = ExtResource("4_s3tgy")
 max_health = 3
 metadata/_custom_type_script = "uid://s30fkqvet7vq"
 
-[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[node name="StateAnimationManager" type="Node" parent="." unique_id=1833239336 node_paths=PackedStringArray("animation_sprite_2d")]
+script = ExtResource("8_aa35n")
+animation_sprite_2d = NodePath("../AnimatedSprite2D")
+metadata/_custom_type_script = "uid://cbjw8ht3wlrfh"
+
+[node name="EnemyStateMachine" type="Node" parent="." unique_id=1892463777]
+script = ExtResource("4_o614a")
+metadata/_custom_type_script = "uid://cuelm0uyrp44p"
+
+[node name="CrabWalkState" type="Node" parent="EnemyStateMachine" unique_id=700801875]
+script = ExtResource("5_br8xs")
+animation_name = "walk"
+metadata/_custom_type_script = "uid://fsskut86vv0w"
+
+[node name="CrabIdleState" type="Node" parent="EnemyStateMachine" unique_id=2069878436]
+script = ExtResource("6_br8xs")
+animation_name = "idle"
+metadata/_custom_type_script = "uid://6u8c5htcca03"
+
 [connection signal="area_entered" from="Hurtbox" to="." method="_on_hurtbox_area_entered"]
