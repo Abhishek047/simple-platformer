@@ -27,7 +27,7 @@ func handleInput(_input: InputEvent) -> void:
 			player.velocity.y = 0
 			state_machine.change_state('jumpplayerstate');
 
-func onExit():
+func onExit(_next_state: String):
 	player.jump_buffer_timer.stop();
 	player.coyote_timer.stop();
 

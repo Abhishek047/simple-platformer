@@ -13,7 +13,7 @@ func initActor(prop_actor: BaseActor):
 func onEnter():
 	pass
 
-func onExit():
+func onExit(_next_state: String):
 	pass
 
 func update(_delta: float) -> void:

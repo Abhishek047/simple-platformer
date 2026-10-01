@@ -40,7 +40,7 @@ var base_muzzle_position: Vector2;
 
 func _ready() -> void:
 	base_muzzle_position = muzzle.position;
-	# Engine.time_scale = 0.4
+	Engine.time_scale = 0.4
 	init_specs();
 	# set animation manager and state machine
 	for child in get_children():

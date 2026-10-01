@@ -61,5 +61,5 @@ func handleInput(input: InputEvent) -> void:
 	if input.is_action_pressed("jump"):
 		state_machine.change_state('jumpplayerstate')
 
-func onExit():
+func onExit(_next_state: String):
 	pass

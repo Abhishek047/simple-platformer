@@ -20,13 +20,13 @@ func _physics_process(delta: float) -> void:
 	move_local_x(direction * speed * delta)
 
 
-func _on_hitbox_body_entered(body: Node2D) -> void:
+func _on_hitbox_body_entered(_body: Node2D) -> void:
 	bullet_impact()
 
 func get_bullet_damage() -> int:
 	return damage;
 
-func _on_hitbox_area_entered(area: Area2D) -> void:
+func _on_hitbox_area_entered(_area: Area2D) -> void:
 	print("hitbox area entered")
 
 func bullet_impact() -> void:

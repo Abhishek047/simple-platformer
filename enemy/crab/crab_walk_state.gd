@@ -23,6 +23,4 @@ func updatePhysics(delta: float) -> void:
 			state_machine.direction = Vector2.RIGHT
 		else:
 			state_machine.direction = Vector2.LEFT
-		crab.can_walk = false;
 		state_machine.change_state("crabidlestate")
-		crab.patrol_timer.start()

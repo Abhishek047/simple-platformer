@@ -1,0 +1,12 @@
+[gd_scene format=3 uid="uid://cevaj1o8nx635"]
+
+[ext_resource type="Script" uid="uid://bocsqc2q4hu0l" path="res://enemy/utils/groupDetector/group_detector.gd" id="1_cmxi7"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_kof7i"]
+radius = 8.062258
+
+[node name="GroupDetector" type="Area2D" unique_id=1376084479]
+script = ExtResource("1_cmxi7")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=727726400]
+shape = SubResource("CircleShape2D_kof7i")

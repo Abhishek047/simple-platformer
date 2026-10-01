@@ -1,0 +1,79 @@
+[gd_scene format=3 uid="uid://cr0ynj8h1vw8h"]
+
+[ext_resource type="Texture2D" uid="uid://caq440f18ddes" path="res://enemy/enemy_assets/fireball-explosion.png" id="1_28mbf"]
+[ext_resource type="Script" uid="uid://sropt1t0o7eh" path="res://enemy/crab/crab_projectile/fireball_impact.gd" id="2_tbqp2"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_i8jnu"]
+atlas = ExtResource("1_28mbf")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jvqy0"]
+atlas = ExtResource("1_28mbf")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_x7btg"]
+atlas = ExtResource("1_28mbf")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cbseg"]
+atlas = ExtResource("1_28mbf")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3t14k"]
+atlas = ExtResource("1_28mbf")
+region = Rect2(128, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uhs78"]
+atlas = ExtResource("1_28mbf")
+region = Rect2(160, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_opb4p"]
+atlas = ExtResource("1_28mbf")
+region = Rect2(192, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ue8uu"]
+atlas = ExtResource("1_28mbf")
+region = Rect2(224, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ue8uu"]
+animations = [{
+"frames": [],
+"loop": true,
+"name": &"deafult",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_i8jnu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jvqy0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_x7btg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cbseg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3t14k")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_uhs78")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_opb4p")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ue8uu")
+}],
+"loop": false,
+"name": &"fireball-impact",
+"speed": 15.0
+}]
+
+[node name="FireballImpact" type="AnimatedSprite2D" unique_id=1340642695]
+sprite_frames = SubResource("SpriteFrames_ue8uu")
+animation = &"fireball-impact"
+frame_progress = 0.6717717
+script = ExtResource("2_tbqp2")

@@ -2,12 +2,32 @@
 
 [ext_resource type="Texture2D" uid="uid://byxf81odo1lc2" path="res://enemy/enemy_assets/crab-idle.png" id="1_c27nh"]
 [ext_resource type="Script" uid="uid://4ihb2dv3kuj0" path="res://enemy/crab/crab_e.gd" id="1_uy6dy"]
+[ext_resource type="Texture2D" uid="uid://c8ygyma4bfcd0" path="res://enemy/enemy_assets/crab-attack.png" id="2_hmj6l"]
 [ext_resource type="Texture2D" uid="uid://cn0ym41tn1uhd" path="res://enemy/enemy_assets/crab-walk.png" id="2_uy6dy"]
 [ext_resource type="Script" uid="uid://cuelm0uyrp44p" path="res://enemy/states/enemy_state_management.gd" id="4_o614a"]
-[ext_resource type="Script" uid="uid://s30fkqvet7vq" path="res://scripts/health_script.gd" id="4_s3tgy"]
+[ext_resource type="Script" path="res://scripts/health_script.gd" id="4_s3tgy"]
+[ext_resource type="Script" uid="uid://bocsqc2q4hu0l" path="res://enemy/utils/groupDetector/group_detector.gd" id="4_vbdru"]
 [ext_resource type="Script" uid="uid://fsskut86vv0w" path="res://enemy/crab/crab_walk_state.gd" id="5_br8xs"]
 [ext_resource type="Script" uid="uid://6u8c5htcca03" path="res://enemy/crab/crab_idle_state.gd" id="6_br8xs"]
 [ext_resource type="Script" uid="uid://cbjw8ht3wlrfh" path="res://scripts/state_animation_manager.gd" id="8_aa35n"]
+[ext_resource type="Script" uid="uid://de0nw3wt2pn74" path="res://enemy/crab/crab_attack_state.gd" id="9_h7vgm"]
+[ext_resource type="Script" uid="uid://dph0o8yldppdl" path="res://enemy/crab/crab_alert_state.gd" id="12_wgdut"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wgdut"]
+atlas = ExtResource("2_hmj6l")
+region = Rect2(0, 0, 48, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wmgdl"]
+atlas = ExtResource("2_hmj6l")
+region = Rect2(48, 0, 48, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cakwh"]
+atlas = ExtResource("2_hmj6l")
+region = Rect2(96, 0, 48, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5jeon"]
+atlas = ExtResource("2_hmj6l")
+region = Rect2(144, 0, 48, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_s3tgy"]
 atlas = ExtResource("1_c27nh")
@@ -43,6 +63,23 @@ region = Rect2(144, 0, 48, 32)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_ymbyc"]
 animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wgdut")
+}, {
+"duration": 4.0,
+"texture": SubResource("AtlasTexture_wmgdl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cakwh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5jeon")
+}],
+"loop": false,
+"name": &"attack",
+"speed": 10.0
+}, {
 "frames": [],
 "loop": true,
 "name": &"default",
@@ -83,21 +120,52 @@ animations = [{
 "speed": 7.0
 }]
 
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_hmj6l"]
+radius = 25.0
+height = 162.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_hmj6l"]
+radius = 171.0
+
 [sub_resource type="CircleShape2D" id="CircleShape2D_c27nh"]
 radius = 13.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_uy6dy"]
 radius = 15.0
 
-[node name="Crab_E" type="CharacterBody2D" unique_id=623708034]
+[node name="Crab_E" type="CharacterBody2D" unique_id=623708034 node_paths=PackedStringArray("projectile_genrator", "group_detector", "detectors")]
 script = ExtResource("1_uy6dy")
+projectile_genrator = NodePath("ProjectileGenrator")
+group_detector = NodePath("AnimatedSprite2D/Detectors/GroupDetector")
+detectors = NodePath("AnimatedSprite2D/Detectors")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1262141741]
 position = Vector2(0, -15)
 sprite_frames = SubResource("SpriteFrames_ymbyc")
-animation = &"walk"
+animation = &"attack"
 autoplay = "idle"
-frame_progress = 0.4197617
+frame = 3
+frame_progress = 1.0
+
+[node name="Detectors" type="Node2D" parent="AnimatedSprite2D" unique_id=1718314520]
+
+[node name="GroupDetector" type="Area2D" parent="AnimatedSprite2D/Detectors" unique_id=1345940731]
+collision_layer = 4
+collision_mask = 3
+script = ExtResource("4_vbdru")
+group_name = &"player"
+active_detector_name = &"patrol"
+metadata/_custom_type_script = "uid://bocsqc2q4hu0l"
+
+[node name="patrol" type="CollisionShape2D" parent="AnimatedSprite2D/Detectors/GroupDetector" unique_id=231880239]
+position = Vector2(-45, -1)
+rotation = 1.5707964
+shape = SubResource("CapsuleShape2D_hmj6l")
+debug_color = Color(0.39607844, 0.47058824, 1, 0.07058824)
+
+[node name="alert" type="CollisionShape2D" parent="AnimatedSprite2D/Detectors/GroupDetector" unique_id=1380721873]
+shape = SubResource("CircleShape2D_hmj6l")
+debug_color = Color(0.85399216, 0.00079357985, 0.8890714, 0.047058824)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1352469840]
 position = Vector2(0, -13)
@@ -116,7 +184,6 @@ debug_color = Color(0, 0.5903202, 0.7507857, 0.28235295)
 [node name="HealthComponent" type="Node" parent="." unique_id=91930194]
 script = ExtResource("4_s3tgy")
 max_health = 3
-metadata/_custom_type_script = "uid://s30fkqvet7vq"
 
 [node name="StateAnimationManager" type="Node" parent="." unique_id=1833239336 node_paths=PackedStringArray("animation_sprite_2d")]
 script = ExtResource("8_aa35n")
@@ -136,5 +203,18 @@ metadata/_custom_type_script = "uid://fsskut86vv0w"
 script = ExtResource("6_br8xs")
 animation_name = "idle"
 metadata/_custom_type_script = "uid://6u8c5htcca03"
+
+[node name="CrabAttackState" type="Node" parent="EnemyStateMachine" unique_id=1287690945]
+script = ExtResource("9_h7vgm")
+animation_name = "attack"
+metadata/_custom_type_script = "uid://de0nw3wt2pn74"
+
+[node name="CrabAlertState" type="Node" parent="EnemyStateMachine" unique_id=212645288]
+script = ExtResource("12_wgdut")
+animation_name = "idle"
+metadata/_custom_type_script = "uid://dph0o8yldppdl"
+
+[node name="ProjectileGenrator" type="Marker2D" parent="." unique_id=160045021]
+position = Vector2(-14, -14)
 
 [connection signal="area_entered" from="Hurtbox" to="." method="_on_hurtbox_area_entered"]

@@ -21,7 +21,7 @@ func init(actor: BaseActor, animation_manager: StateAnimationManager):
 	player_animation_manager = animation_manager
 
 func _physics_process(delta):
-	var direction = get_direction()
+	var player_direction = get_direction()
 	# Global transitions
 	if not player.is_on_floor():
 		if player.velocity.y <= 0:
@@ -33,8 +33,8 @@ func _physics_process(delta):
 			change_state(STATES_NAMES.FALL)
 	super._physics_process(delta)
 	
-	if direction != 0:
-		player_animation_manager.flip_animation_horizontal(false if direction > 0 else true)
+	if player_direction != 0:
+		player_animation_manager.flip_animation_horizontal(false if player_direction > 0 else true)
 	
 	player.move_and_slide()
 
@@ -44,8 +44,8 @@ func change_state(new_state: String) -> void:
 		player.move_and_slide()
 
 func get_direction() -> float:
-	var direction: float = Input.get_axis("move_left", "move_right")
-	return direction;
+	var player_direction: float = Input.get_axis("move_left", "move_right")
+	return player_direction;
 
 func _input(event):
 	# handle dead player here to return
